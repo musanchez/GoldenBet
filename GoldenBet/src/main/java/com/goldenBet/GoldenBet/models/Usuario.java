@@ -1,5 +1,6 @@
 package com.goldenBet.GoldenBet.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -76,6 +77,7 @@ public class Usuario {
     )
     private String respuesta;
 
+    @JsonIgnore
     @OneToMany(
             mappedBy = "usuario",
             fetch = FetchType.LAZY
