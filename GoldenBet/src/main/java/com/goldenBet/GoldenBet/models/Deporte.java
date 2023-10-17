@@ -1,5 +1,6 @@
 package com.goldenBet.GoldenBet.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -24,15 +25,10 @@ public class Deporte {
     )
     private String nombre;
 
+    @JsonIgnore
     @OneToMany(
             mappedBy = "deporte",
             fetch = FetchType.LAZY
     )
     private List<Competencia> competenciaList;
-
-    @OneToMany(
-            mappedBy = "deporte",
-            fetch = FetchType.LAZY
-    )
-    private List<Evento> eventosList;
 }

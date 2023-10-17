@@ -1,11 +1,9 @@
 package com.goldenBet.GoldenBet.repository;
 
-import com.goldenBet.GoldenBet.models.Usuario;
+import com.goldenBet.GoldenBet.models.Evento;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-@Repository("RepoUsuario")
-public interface IRepositoryUsuario extends JpaRepository<Usuario, String> {
-
-
+@Repository("RepoEvento")
+public interface IRepositoryEvento extends JpaRepository<Evento, String> {
 }

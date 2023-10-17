@@ -1,12 +1,11 @@
 package com.goldenBet.GoldenBet.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-
-import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
@@ -49,11 +48,12 @@ public class Evento {
             fetch = FetchType.LAZY
     )
     @JoinColumn(
-            name = "DeporteId",
-            foreignKey = @ForeignKey(name = "FK_DeporteEvento")
+            name = "CompetenciaId",
+            foreignKey = @ForeignKey(name = "FK_CompetenciaEvento")
     )
-    private Deporte deporte;
+    private Competencia competencia;
 
+    @JsonIgnore
     @OneToMany(
             mappedBy = "evento",
             fetch = FetchType.LAZY

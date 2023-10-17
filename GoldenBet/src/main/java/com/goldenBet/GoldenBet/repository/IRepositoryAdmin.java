@@ -1,11 +1,9 @@
 package com.goldenBet.GoldenBet.repository;
 
-import com.goldenBet.GoldenBet.models.Usuario;
+import com.goldenBet.GoldenBet.models.Admin;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-@Repository("RepoUsuario")
-public interface IRepositoryUsuario extends JpaRepository<Usuario, String> {
-
-
+@Repository("RepoAdmin")
+public interface IRepositoryAdmin extends JpaRepository<Admin, String> {
 }

@@ -1,5 +1,6 @@
 package com.goldenBet.GoldenBet.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -30,6 +31,7 @@ public class Admin {
     )
     private String cedula;
 
+    @JsonIgnore
     @OneToMany(
             mappedBy = "adminRep",
             fetch = FetchType.LAZY

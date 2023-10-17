@@ -1,10 +1,13 @@
 package com.goldenBet.GoldenBet.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Entity
 @Data
@@ -22,6 +25,7 @@ public class Competencia {
     )
     private String nombre;
 
+
     @ManyToOne(
             fetch = FetchType.LAZY
     )
@@ -30,4 +34,11 @@ public class Competencia {
             foreignKey = @ForeignKey(name = "FK_Deporte_ID")
     )
     private Deporte deporte;
+
+    @JsonIgnore
+    @OneToMany(
+            mappedBy = "competencia",
+            fetch = FetchType.LAZY
+    )
+    private List<Evento> eventosList;
 }
