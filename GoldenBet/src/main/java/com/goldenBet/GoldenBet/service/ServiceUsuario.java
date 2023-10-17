@@ -4,10 +4,11 @@ import com.goldenBet.GoldenBet.dto.UsuarioDto;
 import com.goldenBet.GoldenBet.models.Usuario;
 import com.goldenBet.GoldenBet.repository.IRepositoryUsuario;
 import lombok.SneakyThrows;
+import org.jasypt.util.text.BasicTextEncryptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
-
+import java.security.SecureRandom;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -40,7 +41,12 @@ public class ServiceUsuario implements IServiceUsuario {
         usuario.setCorreo(usuarioDto.getCorreo());
         usuario.setCedula(usuarioDto.getCedula());
         usuario.setNombre(usuarioDto.getNombre());
-        usuario.setPassword(usuarioDto.getClave());
+
+        //CONTRASEÑA
+        //usuario.setPassword(usuarioDto.getClave());
+        String encryptedPassword = generateRandomEncryptedPassword();
+        usuario.setPassword(encryptedPassword);
+
         usuario.setTelefono(usuarioDto.getTelefono());
         usuario.setPregunta(usuarioDto.getPregunta());
         usuario.setUsername(usuarioDto.getUsuario());
@@ -107,5 +113,33 @@ public class ServiceUsuario implements IServiceUsuario {
             }
         }
         return false;
+    }
+
+    //generar la salt
+    private String generateRandomSalt(int length) {
+        SecureRandom random = new SecureRandom();
+        String characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+
+        StringBuilder salt = new StringBuilder(length);
+        for (int i = 0; i < length; i++) {
+            salt.append(characters.charAt(random.nextInt(characters.length())));
+        }
+        return salt.toString();
+    }
+
+    private String generateRandomEncryptedPassword() {
+        SecureRandom random = new SecureRandom();
+        String characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-_+=<>?";
+
+        StringBuilder password = new StringBuilder(50);
+        for (int i = 0; i < 50; i++) {
+            password.append(characters.charAt(random.nextInt(characters.length())));
+        }
+
+        BasicTextEncryptor textEncryptor = new BasicTextEncryptor();
+        String salt = generateRandomSalt(16); // Genera una sal aleatoria de 16 caracteres
+        textEncryptor.setPassword(salt);
+
+        return "{ENC}" + textEncryptor.encrypt(password.toString());
     }
 }
