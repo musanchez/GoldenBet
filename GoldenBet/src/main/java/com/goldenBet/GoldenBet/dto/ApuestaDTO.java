@@ -13,8 +13,8 @@ public class ApuestaDTO {
     @JsonProperty("Monto")
     private final BigDecimal monto;
 
-    @JsonProperty("ID_Admin_Encargado")
-    private final String idAdmin;
+    //@JsonProperty("ID_Admin_Encargado")
+    //private final String idAdmin;
 
     @JsonProperty("ID_Apostador")
     private final String idUsuario;

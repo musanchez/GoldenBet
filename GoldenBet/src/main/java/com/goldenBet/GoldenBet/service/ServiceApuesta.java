@@ -45,16 +45,16 @@ public class ServiceApuesta implements IServiceApuesta {
     @SneakyThrows
     public void create(ApuestaDTO apuestaDTO) {
         String idAdmin, idUsuario, idEvento;
-        idAdmin = apuestaDTO.getIdAdmin();
+        //idAdmin = apuestaDTO.getIdAdmin();
         idUsuario = apuestaDTO.getIdUsuario();
         idEvento = apuestaDTO.getIdEvento();
 
-        boolean admin_existe = repoAdmin.existsById(idAdmin);
+        //boolean admin_existe = repoAdmin.existsById(idAdmin);
         boolean usuario_existe = repoUsuario.existsById(idUsuario);
         boolean evento_existe = repoEvento.existsById(idEvento);
 
-        if(!admin_existe)
-            throw new Exception("El admin a ser encargado no existe");
+        //if(!admin_existe)
+          //  throw new Exception("El admin a ser encargado no existe");
 
         if(!usuario_existe)
             throw new Exception("El apostador no existe");
@@ -67,7 +67,7 @@ public class ServiceApuesta implements IServiceApuesta {
         String idApuesta = "apt-" + (repoApuesta.count() + 1);
         String descripcionApuesta = apuestaDTO.getDescripcion();
         BigDecimal montoApuesta = apuestaDTO.getMonto();
-        Admin adminEncargado = repoAdmin.findById(idAdmin).get();
+        //Admin adminEncargado = repoAdmin.findById(idAdmin).get();
         Usuario userApostador = repoUsuario.findById(idUsuario).get();
         Evento eventoApuesta = repoEvento.findById(idEvento).get();
 
@@ -75,7 +75,7 @@ public class ServiceApuesta implements IServiceApuesta {
         apuesta.setId(idApuesta);
         apuesta.setDescripcion(descripcionApuesta);
         apuesta.setMonto(montoApuesta);
-        apuesta.setAdminRep(adminEncargado);
+        //apuesta.setAdminRep(adminEncargado);
         apuesta.setUsuario(userApostador);
         apuesta.setEvento(eventoApuesta);
 
