@@ -1,5 +1,6 @@
 package com.goldenBet.GoldenBet.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -37,6 +38,7 @@ public class Apuesta {
             name = "AdminEncargado",
             foreignKey = @ForeignKey(name = "FK_AdminEncargado")
     )
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Admin adminRep;
 
     @ManyToOne(
@@ -46,6 +48,7 @@ public class Apuesta {
             name = "UsuarioApostador",
             foreignKey = @ForeignKey(name = "FK_UsuarioApostador")
     )
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Usuario usuario;
 
     @ManyToOne(
@@ -55,5 +58,6 @@ public class Apuesta {
             name = "EventoApuesta",
             foreignKey = @ForeignKey(name = "FK_EventoApuesta")
     )
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Evento evento;
 }
