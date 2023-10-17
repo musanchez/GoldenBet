@@ -1,6 +1,7 @@
 package com.goldenBet.GoldenBet.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -51,6 +52,7 @@ public class Evento {
             name = "CompetenciaId",
             foreignKey = @ForeignKey(name = "FK_CompetenciaEvento")
     )
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Competencia competencia;
 
     @JsonIgnore

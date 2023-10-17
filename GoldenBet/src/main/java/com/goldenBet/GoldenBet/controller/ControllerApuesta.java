@@ -27,7 +27,7 @@ public class ControllerApuesta {
         serviceApuesta.create(apuestaDTO);
     }
 
-    @GetMapping("/getall")
+    @GetMapping("/all")
     public List<Apuesta> getAll() {
         return serviceApuesta.getAll();
     }

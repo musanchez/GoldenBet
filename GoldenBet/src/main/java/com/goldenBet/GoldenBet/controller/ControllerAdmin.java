@@ -27,7 +27,7 @@ public class ControllerAdmin {
         serviceAdmin.create(adminDTO);
     }
 
-    @GetMapping("/getall")
+    @GetMapping("/all")
     public List<Admin> getAll() {
         return serviceAdmin.getAll();
     }
