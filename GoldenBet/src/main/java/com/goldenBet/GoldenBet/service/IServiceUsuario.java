@@ -12,5 +12,9 @@ public interface IServiceUsuario {
 
     public List<Usuario> getAll();
 
+    public void delete(String id);
+
+
+
 
 }

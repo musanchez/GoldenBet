@@ -55,6 +55,11 @@ public class ServiceUsuario implements IServiceUsuario {
         return repositoryUsuario.findAll();
     }
 
+    @Override
+    public void delete(String id) {
+        repositoryUsuario.deleteById(id);
+    }
+
     private boolean isPasswordValid(String password) {
         // Check if the password is at least 8 characters in length
         if (password.length() < 8) {

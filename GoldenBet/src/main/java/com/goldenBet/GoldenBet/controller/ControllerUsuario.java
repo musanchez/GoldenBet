@@ -6,6 +6,7 @@ import com.goldenBet.GoldenBet.models.Usuario;
 import com.goldenBet.GoldenBet.service.IServiceUsuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -32,4 +33,16 @@ public class ControllerUsuario {
     public List<Usuario> getAll() {
         return serviceUsuario.getAll();
     }
+
+
+    @PutMapping("/update")
+    public void update(@RequestBody UsuarioDto usuarioDto) {
+        serviceUsuario.create(usuarioDto);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public void delete(@PathVariable String id) {
+        serviceUsuario.delete(id);
+    }
+
 }
