@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/evento")
@@ -30,5 +31,17 @@ public class ControllerEvento {
     @GetMapping("/all")
     public List<Evento> getAll() {
         return serviceEvento.getAll();
+    }
+
+    //GetMapping endpoint para getByParticipante conjunto
+    @GetMapping("/getbyparticipante/{participanteName}")
+    public Set<Evento> getByParticipante(@PathVariable String participanteName) {
+        return serviceEvento.getByParticipante(participanteName);
+    }
+
+    //GetMapping endpoint para getByCompetenciaName
+    @GetMapping("/getbycompetencia/{competenciaName}")
+    public List<Evento> getByCompetencia(@PathVariable String competenciaName) {
+        return serviceEvento.getByCompetenciaName(competenciaName);
     }
 }
