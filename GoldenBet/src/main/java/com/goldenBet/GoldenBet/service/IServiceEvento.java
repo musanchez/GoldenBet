@@ -11,7 +11,25 @@ public interface IServiceEvento {
 
     List<Evento> getAll();
 
-    Set<Evento> getByParticipante(String participanteName);
+    //abstraccion de metodo para GET por nombre de patcicipante (conjunto, SET)
+    Set<Evento> getByParticipantes(String participanteName);
 
-    List<Evento> getByCompetenciaName(String competenciaName);
+    //abstraccion de funcion para GET por nombre de competencia (list)
+    List<Evento> getByCompetencia(String competenciaName);
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+//Set<Evento> getByParticipante(String participanteName);
+
+//List<Evento> getByCompetenciaName(String competenciaName);

@@ -34,6 +34,24 @@ public class ControllerEvento {
     }
 
     //GetMapping endpoint para getByParticipante conjunto
+
+    @GetMapping("/getbyparticipante/{participanteName}")
+    public Set<Evento> getByParticipantes(@PathVariable String participanteName) {
+        return serviceEvento.getByParticipantes(participanteName);
+    }
+
+    //GetMapping endpoint para getByCompetenciaName
+    @GetMapping("/getbycompetencia/{competenciaName}")
+    public List<Evento> getByCompetencia(@PathVariable String competenciaName) {
+        return serviceEvento.getByCompetencia(competenciaName);
+    }
+
+
+
+
+
+
+    /*
     @GetMapping("/getbyparticipante/{participanteName}")
     public Set<Evento> getByParticipante(@PathVariable String participanteName) {
         return serviceEvento.getByParticipante(participanteName);
@@ -44,4 +62,6 @@ public class ControllerEvento {
     public List<Evento> getByCompetencia(@PathVariable String competenciaName) {
         return serviceEvento.getByCompetenciaName(competenciaName);
     }
+
+     */
 }

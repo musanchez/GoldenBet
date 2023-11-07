@@ -78,6 +78,32 @@ public class ServiceEvento implements IServiceEvento{
     }
 
     //metodo que retorne SET de eventos filtrados por participante (ambos 1 y 2)
+
+
+    //metodo que retorne lista de eventos filtrados por competencia (nombre)
+
+    @Override
+    public Set<Evento> getByParticipantes(String participanteName) {
+        List<Evento> lista1 = repoEvento.getByParticipante1(participanteName);
+        List<Evento> lista2 = repoEvento.getByParticipante2(participanteName);
+
+        Set<Evento> setCombinado = new HashSet<>();
+        setCombinado.addAll(lista1);
+        setCombinado.addAll(lista2);
+
+        return setCombinado;
+    }
+
+    @Override
+    public List<Evento> getByCompetencia(String competenciaName) {
+        return repoEvento.getByCompetencia(competenciaName);
+    }
+
+
+
+
+
+    /*
     @Override
     public Set<Evento> getByParticipante(String participanteName) {
 
@@ -101,4 +127,6 @@ public class ServiceEvento implements IServiceEvento{
     public List<Evento> getByCompetenciaName(String competenciaName) {
         return repoEvento.getByCompetenciaName(competenciaName);
     }
+
+     */
 }
