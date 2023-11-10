@@ -45,6 +45,18 @@ public class Evento {
     )
     private LocalTime hora;
 
+    @Column(
+            nullable = false,
+            length = 200
+    )
+    private String descripcion;
+
+    @Column(
+            nullable = false,
+            length = 20
+    )
+    private String estado;
+
     @ManyToOne(
             fetch = FetchType.LAZY
     )

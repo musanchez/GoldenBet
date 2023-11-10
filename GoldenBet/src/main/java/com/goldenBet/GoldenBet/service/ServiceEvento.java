@@ -2,9 +2,11 @@ package com.goldenBet.GoldenBet.service;
 
 import com.goldenBet.GoldenBet.dto.EventoDTO;
 import com.goldenBet.GoldenBet.models.Competencia;
+import com.goldenBet.GoldenBet.models.Deporte;
 import com.goldenBet.GoldenBet.models.Evento;
 import com.goldenBet.GoldenBet.repository.IRepositoryCompetencia;
 import com.goldenBet.GoldenBet.repository.IRepositoryEvento;
+import jdk.swing.interop.SwingInterOpUtils;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -34,22 +36,31 @@ public class ServiceEvento implements IServiceEvento{
     public void create(EventoDTO eventoDTO) {
 
         String idCompetenciaAsignada = eventoDTO.getCompetenciaId();
+
+        //posibles excepciones
         boolean competencia_existe = repoCompetencia.existsById(idCompetenciaAsignada);
+
+        boolean mismos_participantes = eventoDTO.getParticipante1()
+                .equals(eventoDTO.getParticipante2());
+
+        boolean descripcion_nula = eventoDTO.getDescripcion() == null || eventoDTO.getDescripcion().isBlank();
 
         if(!competencia_existe)
             throw new Exception("ERROR, la competencia asignada al evento no existe");
 
-        boolean mismos_participantes = eventoDTO.getParticipante1()
-                                            .equals(eventoDTO.getParticipante2());
 
         if(mismos_participantes)
             throw new Exception("ERROR, se ingresó el mismo participante dos veces");
+
+        if(descripcion_nula)
+            throw new Exception("ERROR, no se ingresó una descripción válida");
 
         //atributos del POJO a asignar mediante DTO
         Evento evento = new Evento();
         String idEvento = "evt-" + (repoEvento.count() + 1);
         String primerParticipante = eventoDTO.getParticipante1().trim();
         String segundoParticipante = eventoDTO.getParticipante2().trim();
+        String descripcion = eventoDTO.getDescripcion().trim();
         LocalDate fechaEvento = LocalDate.now();
         LocalTime horaEvento = LocalTime.now();
 
@@ -68,19 +79,56 @@ public class ServiceEvento implements IServiceEvento{
         evento.setFecha(fechaEvento);
         evento.setHora(horaEvento);
         evento.setCompetencia(competenciaAsignada);
+        evento.setDescripcion(descripcion);
+        evento.setEstado("PROGRAMADO");
 
+        System.out.println("\n***EVENTO CREADO DE MANERA SATISFACTORIA, ALMACENADO EN LA BASE DE DATOS***\n");
         repoEvento.save(evento);
     }
 
     @Override
-    public List<Evento> getAll() {
-        return repoEvento.findAll();
+    public List<Evento> getByDescripcion(String descripcion) {
+        List<Evento> eventosList = repoEvento.getByDescripcion(descripcion);
+
+        for(Evento evt : eventosList) {
+            System.out.println(evt.getId());
+            System.out.println(evt.getDescripcion());
+            System.out.println(evt.getEstado());
+            System.out.println(evt.getParticipante1());
+            System.out.println(evt.getParticipante1());
+            System.out.println(evt.getCompetencia().getNombre());
+            System.out.println(evt.getFecha());
+            System.out.println(evt.getHora());
+            System.out.println();
+        }
+
+        return eventosList;
     }
 
-    //metodo que retorne SET de eventos filtrados por participante (ambos 1 y 2)
+    @Override
+    public List<Evento> getByEstado(String estado) {
+        List<Evento> eventosList = repoEvento.getByEstado(estado);
+        return eventosList;
+    }
 
+    @Override
+    public List<Evento> getAll() {
+        List<Evento> eventosList = repoEvento.findAll();
 
-    //metodo que retorne lista de eventos filtrados por competencia (nombre)
+        for(Evento evt : eventosList) {
+            System.out.println(evt.getId());
+            System.out.println(evt.getDescripcion());
+            System.out.println(evt.getEstado());
+            System.out.println(evt.getParticipante1());
+            System.out.println(evt.getParticipante1());
+            System.out.println(evt.getCompetencia().getNombre());
+            System.out.println(evt.getFecha());
+            System.out.println(evt.getHora());
+            System.out.println();
+        }
+
+        return eventosList;
+    }
 
     @Override
     public Set<Evento> getByParticipantes(String participanteName) {
@@ -98,35 +146,4 @@ public class ServiceEvento implements IServiceEvento{
     public List<Evento> getByCompetencia(String competenciaName) {
         return repoEvento.getByCompetencia(competenciaName);
     }
-
-
-
-
-
-    /*
-    @Override
-    public Set<Evento> getByParticipante(String participanteName) {
-
-        //lista 1 con primer Get
-        //lista 2 con segundo Get
-
-        //retornar Set de combinación de ambas listas
-
-        List<Evento> lista1 = repoEvento.getByParticipanteUno(participanteName);
-        List<Evento> lista2 = repoEvento.getByParticipanteDos(participanteName);
-
-        Set<Evento> listaCombinada = new HashSet<>();
-        listaCombinada.addAll(lista1);
-        listaCombinada.addAll(lista2);
-
-        return listaCombinada;
-    }
-
-    //metodo que retorne lista de eventos filtrados por competencia (nombre)
-    @Override
-    public List<Evento> getByCompetenciaName(String competenciaName) {
-        return repoEvento.getByCompetenciaName(competenciaName);
-    }
-
-     */
 }

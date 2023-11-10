@@ -28,18 +28,10 @@ public interface IRepositoryEvento extends JpaRepository<Evento, String> {
     @Query("select a from Evento a where a.competencia.nombre like %:competenciaName%")
     List<Evento> getByCompetencia(@Param("competenciaName") String competenciaName);
 
+    @Query("select a from Evento a where a.estado = :estado")
+    List<Evento> getByEstado(@Param("estado") String estado);
 
+    @Query("select a from Evento a where a.descripcion like %:descripcion%")
+    List<Evento> getByDescripcion(@Param("descripcion") String descripcion);
 
-
-    /*
-    @Query("select a from Evento a where a.participante1 like %:participanteName%")
-    List<Evento> getByParticipanteUno(@Param("participanteName") String participanteName);
-    @Query("select a from Evento a where a.participante2 like %:participanteName%")
-    List<Evento> getByParticipanteDos(@Param("participanteName") String participanteName);
-     */
-
-    /*
-    @Query("select a from Evento a where a.competencia.nombre like %:competenciaNombre%")
-    List<Evento> getByCompetenciaName(@Param("competenciaNombre") String competenciaNombre);
-     */
 }

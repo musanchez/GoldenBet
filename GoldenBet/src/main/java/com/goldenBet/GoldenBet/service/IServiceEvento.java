@@ -17,6 +17,12 @@ public interface IServiceEvento {
     //abstraccion de funcion para GET por nombre de competencia (list)
     List<Evento> getByCompetencia(String competenciaName);
 
+    //abstracción de función para GET por estado de evento
+    List<Evento> getByEstado(String estado);
+
+    //abstracción de función para GET por descripcion de evento
+    List<Evento> getByDescripcion(String descripcion);
+
 }
 
 
