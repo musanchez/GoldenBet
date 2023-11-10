@@ -9,7 +9,6 @@ import java.util.List;
 
 @Repository("RepoEvento")
 public interface IRepositoryEvento extends JpaRepository<Evento, String> {
-
     //metodo con @query annotation para GET por participante 1
     // %:%
     //@Param()

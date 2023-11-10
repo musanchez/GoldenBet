@@ -2,11 +2,9 @@ package com.goldenBet.GoldenBet.service;
 
 import com.goldenBet.GoldenBet.dto.EventoDTO;
 import com.goldenBet.GoldenBet.models.Competencia;
-import com.goldenBet.GoldenBet.models.Deporte;
 import com.goldenBet.GoldenBet.models.Evento;
 import com.goldenBet.GoldenBet.repository.IRepositoryCompetencia;
 import com.goldenBet.GoldenBet.repository.IRepositoryEvento;
-import jdk.swing.interop.SwingInterOpUtils;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
