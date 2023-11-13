@@ -93,7 +93,7 @@ public class ServiceEvento implements IServiceEvento{
             System.out.println(evt.getDescripcion());
             System.out.println(evt.getEstado());
             System.out.println(evt.getParticipante1());
-            System.out.println(evt.getParticipante1());
+            System.out.println(evt.getParticipante2());
             System.out.println(evt.getCompetencia().getNombre());
             System.out.println(evt.getFecha());
             System.out.println(evt.getHora());
@@ -106,6 +106,20 @@ public class ServiceEvento implements IServiceEvento{
     @Override
     public List<Evento> getByEstado(String estado) {
         List<Evento> eventosList = repoEvento.getByEstado(estado);
+
+        //comentariar despues:
+        for(Evento evt : eventosList) {
+            System.out.println(evt.getId());
+            System.out.println(evt.getDescripcion());
+            System.out.println(evt.getEstado());
+            System.out.println(evt.getParticipante1());
+            System.out.println(evt.getParticipante2());
+            System.out.println(evt.getCompetencia().getNombre());
+            System.out.println(evt.getFecha());
+            System.out.println(evt.getHora());
+            System.out.println();
+        }
+
         return eventosList;
     }
 
@@ -113,12 +127,13 @@ public class ServiceEvento implements IServiceEvento{
     public List<Evento> getAll() {
         List<Evento> eventosList = repoEvento.findAll();
 
+        //comentariar despues:
         for(Evento evt : eventosList) {
             System.out.println(evt.getId());
             System.out.println(evt.getDescripcion());
             System.out.println(evt.getEstado());
             System.out.println(evt.getParticipante1());
-            System.out.println(evt.getParticipante1());
+            System.out.println(evt.getParticipante2());
             System.out.println(evt.getCompetencia().getNombre());
             System.out.println(evt.getFecha());
             System.out.println(evt.getHora());
@@ -137,11 +152,39 @@ public class ServiceEvento implements IServiceEvento{
         setCombinado.addAll(lista1);
         setCombinado.addAll(lista2);
 
+        //comentariar despues:
+        for(Evento evt : setCombinado) {
+            System.out.println(evt.getId());
+            System.out.println(evt.getDescripcion());
+            System.out.println(evt.getEstado());
+            System.out.println(evt.getParticipante1());
+            System.out.println(evt.getParticipante2());
+            System.out.println(evt.getCompetencia().getNombre());
+            System.out.println(evt.getFecha());
+            System.out.println(evt.getHora());
+            System.out.println();
+        }
+
         return setCombinado;
     }
 
     @Override
     public List<Evento> getByCompetencia(String competenciaName) {
-        return repoEvento.getByCompetencia(competenciaName);
+        List<Evento> eventosList = repoEvento.getByCompetencia(competenciaName);
+
+        //comentariar despues:
+        for(Evento evt : eventosList) {
+            System.out.println(evt.getId());
+            System.out.println(evt.getDescripcion());
+            System.out.println(evt.getEstado());
+            System.out.println(evt.getParticipante1());
+            System.out.println(evt.getParticipante2());
+            System.out.println(evt.getCompetencia().getNombre());
+            System.out.println(evt.getFecha());
+            System.out.println(evt.getHora());
+            System.out.println();
+        }
+
+        return eventosList;
     }
 }

@@ -44,6 +44,8 @@ class GoldenBetApplicationTests {
 	@Test
 	void testGetAll() {
 
+		System.out.println("Prueba Unitaria GET (all)\n");
+
 		when(eventRepo.findAll())
 				.thenReturn(Stream.of(
 						new Evento(
@@ -92,6 +94,8 @@ class GoldenBetApplicationTests {
 
 		String descripcion = "finals";
 
+		System.out.println("Prueba Unitaria GET (filtro: DESCRIPCION = " + descripcion + ")\n");
+
 		when(eventRepo.getByDescripcion(descripcion))
 				.thenReturn(Stream.of(
 						new Evento(
@@ -122,7 +126,7 @@ class GoldenBetApplicationTests {
 						),
 						new Evento(
 								"evt-100",
-								"Los Angelers Lakers",
+								"Los Angeles Lakers",
 								"San Antonio Spurs",
 								LocalDate.now(),
 								LocalTime.now(),
@@ -150,6 +154,9 @@ class GoldenBetApplicationTests {
 
 	@Test
 	public void testCreate() {
+
+		System.out.println("Prueba Unitaria POST (crear evento deportivo)\n");
+
 		Evento testEvent = new Evento(
 				"evt-250",
 				"Lester Rodríguez",
@@ -181,4 +188,137 @@ class GoldenBetApplicationTests {
 		System.out.println("Evento creado de manera satisfactoria en Mock Test");
 	}
 
+	@Test
+	public void getByParticipante() {
+
+		String participante = "Liverpool FC";
+
+		System.out.println("Prueba Unitaria GET (filtro: PARTICIPANTE = " + participante + ")\n");
+
+		when(eventRepo.getByParticipante1(participante))
+				.thenReturn(Stream.of(
+						new Evento(
+								"evt-501",
+								"Liverpool FC",
+								"Chelsea FC",
+								LocalDate.now(),
+								LocalTime.now(),
+								"Semifinales de la Carabao Cup 2022",
+								"FINALIZADO",
+								new Competencia("cmp-5", "Premier League",
+										new Deporte("dep-4", "Fútbol", null),
+										null),
+								null
+						),
+						new Evento(
+								"evt-209",
+								"Liverpool FC",
+								"Arsenal FC",
+								LocalDate.now(),
+								LocalTime.now(),
+								"Final de la FA Cup 2022",
+								"FINALIZADO",
+								new Competencia("cmp-5", "Premier League",
+										new Deporte("dep-4", "Fútbol", null),
+										null),
+								null
+						)
+				).collect(Collectors.toList()));
+
+		int expectedSize = 2;
+		int actualSize = eventService.getByParticipantes(participante).size();
+		assertEquals(expectedSize, actualSize);
+
+		System.out.println("Cantidad de registros esperados a obtener del test: " + expectedSize);
+		System.out.println("Cantidad obtenida por service (mock): " + actualSize);
+	}
+
+	@Test
+	public void getByEstado() {
+
+		String estado = "PROGRAMADO";
+
+		System.out.println("Prueba Unitaria GET (filtro: ESTADO = " + estado + ")\n");
+
+		when(eventRepo.getByEstado(estado))
+				.thenReturn(Stream.of(
+						new Evento(
+								"evt-100",
+								"Milwaukee Bucks",
+								"Brooklyn Nets",
+								LocalDate.now(),
+								LocalTime.now(),
+								"Regular Season Conference Game",
+								"PROGRAMADO",
+								new Competencia("cmp-10", "NBA",
+										new Deporte("dep-4", "Basketball", null),
+										null),
+								null
+						),
+						new Evento(
+								"evt-305",
+								"Novak Djokovic",
+								"Roger Federer",
+								LocalDate.now(),
+								LocalTime.now(),
+								"Final Individual Masculino 2022",
+								"PROGRAMADO",
+								new Competencia("cmp-12", "Wimbledon",
+										new Deporte("dep-1", "Ténis", null),
+										null),
+								null
+						)
+				).collect(Collectors.toList()));
+
+		int expectedSize = 2;
+		int actualSize = eventService.getByEstado(estado).size();
+		assertEquals(expectedSize, actualSize);
+
+		System.out.println("Cantidad de registros esperados a obtener del test: " + expectedSize);
+		System.out.println("Cantidad obtenida por service (mock): " + actualSize);
+	}
+
+	public void getByCompetencia() {
+
+		String competencia = "UEFA Champions League";
+
+		System.out.println("Prueba Unitaria GET (filtro: COMPETENCIA = " + competencia + ")\n");
+
+		when(eventRepo.getByCompetencia(competencia))
+				.thenReturn(Stream.of(
+						new Evento(
+								"evt-666",
+								"Real Madrid",
+								"Manchester City",
+								LocalDate.now(),
+								LocalTime.now(),
+								"Semifinales de la UEFA Champions League 2023",
+								"EN_CURSO",
+								new Competencia("cmp-22", "UEFA Champions League",
+										new Deporte("dep-7", "Fútbol (Europa)", null),
+										null),
+								null
+						),
+						new Evento(
+								"evt-278",
+								"Paris Saint-Germain",
+								"Chelsea FC",
+								LocalDate.now(),
+								LocalTime.now(),
+								"Cuartos de Final de la UEFA Champions League 2022",
+								"FINALIZADO",
+								new Competencia("cmp-22", "UEFA Champions League",
+										new Deporte("dep-7", "Fútbol (Europa)", null),
+										null),
+								null
+						)
+				).collect(Collectors.toList()));
+
+		int expectedSize = 2;
+		int actualSize = eventService.getByCompetencia(competencia).size();
+		assertEquals(expectedSize, actualSize);
+
+		System.out.println("Cantidad de registros esperados a obtener del test: " + expectedSize);
+		System.out.println("Cantidad obtenida por service (mock): " + actualSize);
+	}
 }
