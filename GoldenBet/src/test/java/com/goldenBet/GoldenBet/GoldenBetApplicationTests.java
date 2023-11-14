@@ -321,4 +321,62 @@ class GoldenBetApplicationTests {
 		System.out.println("Cantidad de registros esperados a obtener del test: " + expectedSize);
 		System.out.println("Cantidad obtenida por service (mock): " + actualSize);
 	}
+
+	@Test
+	public void testGetByDeporte() {
+
+		String deporte = "Baseball";
+
+		System.out.println("Prueba Unitaria GET (filtro: DEPORTE = " + deporte + ")\n");
+
+		when(eventRepo.getByDeporte(deporte))
+				.thenReturn(Stream.of(
+						new Evento(
+						"evt-201",
+						"Los Angeles Dodgers",
+						"New York Yankees",
+						LocalDate.now(),
+						LocalTime.now(),
+						"Serie Mundial 2022",
+						"EN_CURSO",
+						new Competencia("cmp-35", "Major League (MLB)",
+								new Deporte("dep-20", "Béisbol", null),
+								null),
+						null
+						),
+						new Evento(
+								"evt-456",
+								"Tigres de Quintana Roo",
+								"Sultanes de Monterrey",
+								LocalDate.now(),
+								LocalTime.now(),
+								"Playoffs de la LMB 2023 - Final",
+								"PROGRAMADO",
+								new Competencia("cmp-42", "Liga Mexicana (LMB)",
+										new Deporte("dep-20", "Béisbol", null),
+										null),
+								null
+						),
+						new Evento(
+								"evt-789",
+								"Fukuoka SoftBank Hawks",
+								"Yomiuri Giants",
+								LocalDate.now(),
+								LocalTime.now(),
+								"Serie de Japón 2022",
+								"FINALIZADO",
+								new Competencia("cmp-50", "Nippon Professional (NPB)",
+										new Deporte("dep-20", "Béisbol", null),
+										null),
+								null
+						)
+				).toList());
+
+		int expectedSize = 3;
+		int actualSize = eventService.getByDeporte(deporte).size();
+		assertEquals(expectedSize, actualSize);
+
+		System.out.println("Cantidad de registros esperados a obtener del test: " + expectedSize);
+		System.out.println("Cantidad obtenida por service (mock): " + actualSize);
+	}
 }

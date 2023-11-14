@@ -85,9 +85,33 @@ public class ServiceEvento implements IServiceEvento{
     }
 
     @Override
+    public List<Evento> getByDeporte(String deporte) {
+        List<Evento> eventosList = repoEvento.getByDeporte(deporte);
+
+        if(eventosList != null) {
+            //comentariar despues:
+            for(Evento evt : eventosList) {
+                System.out.println(evt.getId());
+                System.out.println(evt.getDescripcion());
+                System.out.println(evt.getEstado());
+                System.out.println(evt.getParticipante1());
+                System.out.println(evt.getParticipante2());
+                System.out.println(evt.getCompetencia().getNombre());
+                System.out.println(evt.getCompetencia().getDeporte().getNombre());
+                System.out.println(evt.getFecha());
+                System.out.println(evt.getHora());
+                System.out.println();
+            }
+        }
+
+        return eventosList;
+    }
+
+    @Override
     public List<Evento> getByDescripcion(String descripcion) {
         List<Evento> eventosList = repoEvento.getByDescripcion(descripcion);
 
+        //comentariar despues:
         for(Evento evt : eventosList) {
             System.out.println(evt.getId());
             System.out.println(evt.getDescripcion());
@@ -95,6 +119,7 @@ public class ServiceEvento implements IServiceEvento{
             System.out.println(evt.getParticipante1());
             System.out.println(evt.getParticipante2());
             System.out.println(evt.getCompetencia().getNombre());
+            System.out.println(evt.getCompetencia().getDeporte().getNombre());
             System.out.println(evt.getFecha());
             System.out.println(evt.getHora());
             System.out.println();
@@ -115,6 +140,7 @@ public class ServiceEvento implements IServiceEvento{
             System.out.println(evt.getParticipante1());
             System.out.println(evt.getParticipante2());
             System.out.println(evt.getCompetencia().getNombre());
+            System.out.println(evt.getCompetencia().getDeporte().getNombre());
             System.out.println(evt.getFecha());
             System.out.println(evt.getHora());
             System.out.println();
@@ -135,6 +161,7 @@ public class ServiceEvento implements IServiceEvento{
             System.out.println(evt.getParticipante1());
             System.out.println(evt.getParticipante2());
             System.out.println(evt.getCompetencia().getNombre());
+            System.out.println(evt.getCompetencia().getDeporte().getNombre());
             System.out.println(evt.getFecha());
             System.out.println(evt.getHora());
             System.out.println();
@@ -160,6 +187,7 @@ public class ServiceEvento implements IServiceEvento{
             System.out.println(evt.getParticipante1());
             System.out.println(evt.getParticipante2());
             System.out.println(evt.getCompetencia().getNombre());
+            System.out.println(evt.getCompetencia().getDeporte().getNombre());
             System.out.println(evt.getFecha());
             System.out.println(evt.getHora());
             System.out.println();
@@ -180,6 +208,7 @@ public class ServiceEvento implements IServiceEvento{
             System.out.println(evt.getParticipante1());
             System.out.println(evt.getParticipante2());
             System.out.println(evt.getCompetencia().getNombre());
+            System.out.println(evt.getCompetencia().getDeporte().getNombre());
             System.out.println(evt.getFecha());
             System.out.println(evt.getHora());
             System.out.println();

@@ -23,6 +23,9 @@ public interface IServiceEvento {
     //abstracción de función para GET por descripcion de evento
     List<Evento> getByDescripcion(String descripcion);
 
+    //abstracción de función para GET por el deporte de la competencia del evento
+    List<Evento> getByDeporte(String deporte);
+
 }
 
 

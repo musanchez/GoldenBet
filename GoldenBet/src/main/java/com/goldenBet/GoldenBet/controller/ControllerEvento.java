@@ -55,4 +55,9 @@ public class ControllerEvento {
     public List<Evento> getByDescripcion(@PathVariable String descripcion) {
         return serviceEvento.getByDescripcion(descripcion);
     }
+
+    @GetMapping("/getbydeporte/{deporte}")
+    public List<Evento> getByDeporte(@PathVariable String deporte) {
+        return serviceEvento.getByDeporte(deporte);
+    }
 }

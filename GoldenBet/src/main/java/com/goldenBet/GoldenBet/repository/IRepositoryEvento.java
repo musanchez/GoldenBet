@@ -33,4 +33,6 @@ public interface IRepositoryEvento extends JpaRepository<Evento, String> {
     @Query("select a from Evento a where a.descripcion like %:descripcion%")
     List<Evento> getByDescripcion(@Param("descripcion") String descripcion);
 
+    @Query("select a from Evento a where a.competencia.deporte.nombre like %:deporte%")
+    List<Evento> getByDeporte(@Param("deporte") String deporte);
 }
